@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SeaWar
+namespace SeaWarProject
 {
     class Program
     {
@@ -16,24 +16,33 @@ namespace SeaWar
             int x = 0;
             int y = 0;
 
-            int[,] arrFieldUser = new int[XY, XY];
-            int[,] arrFieldComp = new int[XY, XY];
+            int[,] userFieldArray = new int[XY, XY];
+            int[,] CompFieldArray = new int[XY, XY];
 
             Console.CursorVisible = false;
 
-            FieldAdd(arrFieldUser);
-            FieldAdd(arrFieldComp);
+            FieldAdd(userFieldArray);
+            FieldAdd(CompFieldArray);
 
-            
-
+            Ship boat = new Ship(3, 4, 4, true);
+            AddShipToFild(boat, userFieldArray);
             while (true)
             {
-                FieldOnDisplayUser(arrFieldUser);
+                FieldOnDisplayUser(userFieldArray);
                 Console.WriteLine();
-                FieldOnDisplayComp(arrFieldComp, x, y);
+                FieldOnDisplayComp(CompFieldArray, x, y);
 
-                MooveOnDisplay(arrFieldComp, ref x, ref y);
+                MooveOnDisplay(CompFieldArray, ref x, ref y);
                 Console.SetCursorPosition(0, 0);
+            }
+        }
+
+        //метод добавления коробля на поле, будет изменятся
+        public static void AddShipToFild(Ship boat, int[,] arrField)
+        {
+            for (var i = 0; i < boat.ShipClass; i++)
+            {
+                arrField[boat.Boat[i].LocationX, boat.Boat[i].LocationY] = 1;
             }
         }
         /// <summary>
@@ -103,7 +112,7 @@ namespace SeaWar
         public static void FieldOnDisplayUser(int[,] arrField)
         {
             Console.Write("┌");
-            for (var i = 0; i < XY*2; i++)
+            for (var i = 0; i < XY * 2; i++)
             {
                 Console.Write("─");
             }
@@ -120,7 +129,7 @@ namespace SeaWar
             }
 
             Console.Write("└");
-            for (var i = 0; i < XY*2; i++)
+            for (var i = 0; i < XY * 2; i++)
             {
                 Console.Write("─");
             }
