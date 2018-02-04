@@ -9,21 +9,22 @@ namespace SeaWar
 {
     class Program
     {
+        const int XY = 10;
         static void Main(string[] args)
         {
 
             int x = 0;
             int y = 0;
 
-            int[,] arrFieldUser = new int[10, 10];
-            int[,] arrFieldComp = new int[10, 10];
+            int[,] arrFieldUser = new int[XY, XY];
+            int[,] arrFieldComp = new int[XY, XY];
 
-
+            Console.CursorVisible = false;
 
             FieldAdd(arrFieldUser);
             FieldAdd(arrFieldComp);
 
-
+            
 
             while (true)
             {
@@ -32,7 +33,7 @@ namespace SeaWar
                 FieldOnDisplayComp(arrFieldComp, x, y);
 
                 MooveOnDisplay(arrFieldComp, ref x, ref y);
-                Console.Clear();
+                Console.SetCursorPosition(0, 0);
             }
         }
         /// <summary>
@@ -58,23 +59,40 @@ namespace SeaWar
         /// <param name="mooveOnX">расположение курсора по х </param>
         /// <param name="mooveOnY">расположение курсора по у</param>
         /// 
-        public static void FieldOnDisplayComp(int[,] arrField, int mooveOnX, int mooveOnY)
+        public static void FieldOnDisplayComp(int[,] arrField, int moveOnX, int moveOnY)
         {
+            Console.Write("┌");
+            for (var i = 0; i < XY * 2; i++)
+            {
+                Console.Write("─");
+            }
+            Console.WriteLine("┐");
+
             for (int i = 0; i < arrField.GetLength(0); i++)
             {
+                Console.Write("│");
                 for (int j = 0; j < arrField.GetLength(1); j++)
                 {
-                    if (mooveOnX == i && mooveOnY == j)
+                    if (moveOnX == i && moveOnY == j)
                     {
-                        Console.Write(5);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("* ");
+                        Console.ResetColor();
                     }
                     else
                     {
-                        Console.Write(arrField[i, j]);
+                        Console.Write(arrField[i, j] + " ");
                     }
                 }
-                Console.WriteLine();
+                Console.WriteLine("│");
             }
+
+            Console.Write("└");
+            for (var i = 0; i < XY * 2; i++)
+            {
+                Console.Write("─");
+            }
+            Console.Write("┘");
         }
 
 
@@ -84,14 +102,29 @@ namespace SeaWar
         /// <param name="arrField"> массив поля игрока</param>
         public static void FieldOnDisplayUser(int[,] arrField)
         {
+            Console.Write("┌");
+            for (var i = 0; i < XY*2; i++)
+            {
+                Console.Write("─");
+            }
+            Console.WriteLine("┐");
+
             for (int i = 0; i < arrField.GetLength(0); i++)
             {
+                Console.Write("│");
                 for (int j = 0; j < arrField.GetLength(1); j++)
                 {
-                    Console.Write(arrField[i, j]);
+                    Console.Write(arrField[i, j] + " ");
                 }
-                Console.WriteLine();
+                Console.WriteLine("│");
             }
+
+            Console.Write("└");
+            for (var i = 0; i < XY*2; i++)
+            {
+                Console.Write("─");
+            }
+            Console.Write("┘");
         }
 
         /// <summary>
@@ -100,35 +133,35 @@ namespace SeaWar
         /// <param name="arrField"> массив поля</param>
         /// <param name="mooveOnX">переменная движения по вертикали</param>
         /// <param name="mooveOnY">переменная движения по горизонтали</param>
-        public static void MooveOnDisplay(int[,] arrField, ref int mooveOnX, ref int mooveOnY)
+        public static void MooveOnDisplay(int[,] arrField, ref int moveOnX, ref int moveOnY)
         {
-            ConsoleKeyInfo PressedKey = Console.ReadKey();
+            ConsoleKeyInfo PressedKey = Console.ReadKey(true);
 
 
             switch (PressedKey.Key)
             {
                 case ConsoleKey.RightArrow:
-                    if (mooveOnY != arrField.GetLength(0) - 1)
+                    if (moveOnY != arrField.GetLength(0) - 1)
                     {
-                        mooveOnY++;
+                        moveOnY++;
                     }
                     break;
                 case ConsoleKey.LeftArrow:
-                    if (mooveOnY != 0)
+                    if (moveOnY != 0)
                     {
-                        mooveOnY--;
+                        moveOnY--;
                     }
                     break;
                 case ConsoleKey.DownArrow:
-                    if (mooveOnX != arrField.GetLength(1) - 1)
+                    if (moveOnX != arrField.GetLength(1) - 1)
                     {
-                        mooveOnX++;
+                        moveOnX++;
                     }
                     break;
                 case ConsoleKey.UpArrow:
-                    if (mooveOnX != 0)
+                    if (moveOnX != 0)
                     {
-                        mooveOnX--;
+                        moveOnX--;
                     }
                     break;
             }
