@@ -46,6 +46,7 @@ namespace SeaWarProject
                 arrField[boat.Boat[i].LocationX, boat.Boat[i].LocationY] = 1;
             }
         }
+
         /// <summary>
         /// метод заполнения массивов инфой(проверочный)
         /// </summary>
