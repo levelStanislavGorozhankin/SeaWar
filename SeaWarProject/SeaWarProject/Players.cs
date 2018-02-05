@@ -20,7 +20,7 @@ namespace SeaWarProject
             {
                 if (Name.Length > 2)
                 {
-                    Name = value;
+                    _name = value;
                 }
                 else
                 {
