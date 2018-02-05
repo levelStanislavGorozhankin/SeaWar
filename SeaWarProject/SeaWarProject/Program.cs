@@ -17,25 +17,23 @@ namespace SeaWarProject
             int y = 0;
 
             int[,] userFieldArray = new int[XY, XY];
-            int[,] CompFieldArray = new int[XY, XY];
+            int[,] compFieldArray = new int[XY, XY];
 
             Console.CursorVisible = false;
 
             FieldAdd(userFieldArray);
-            FieldAdd(CompFieldArray);
+            FieldAdd(compFieldArray);
 
-            Ship boat = new Ship(3, 4, 4, true);
+            Ship boat = new Ship(3, 4, 4, false);
             AddShipToFild(boat, userFieldArray);
-
-
 
             while (true)
             {
                 FieldOnDisplayUser(userFieldArray);
                 Console.WriteLine();
-                FieldOnDisplayComp(CompFieldArray, x, y);
+                FieldOnDisplayComp(compFieldArray, x, y);
 
-                MooveOnDisplay(CompFieldArray, ref x, ref y);
+                MooveOnDisplay(compFieldArray, ref x, ref y);
                 Console.SetCursorPosition(0, 0);
             }
         }
@@ -179,7 +177,5 @@ namespace SeaWarProject
                     break;
             }
         }
-
-
     }
 }
