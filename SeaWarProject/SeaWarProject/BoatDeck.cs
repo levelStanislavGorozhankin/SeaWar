@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SeaWarProject
 {
-    class BoatDeck
+    public class BoatDeck
     {
         public bool HittingState; // статус палубы
         public int LocationX; // координата палубы

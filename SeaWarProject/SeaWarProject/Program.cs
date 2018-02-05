@@ -17,12 +17,12 @@ namespace SeaWarProject
             int y = 0;
 
             int[,] userFieldArray = new int[XY, XY];
-            int[,] CompFieldArray = new int[XY, XY];
+            int[,] compFieldArray = new int[XY, XY];
 
             Console.CursorVisible = false;
 
             FieldAdd(userFieldArray);
-            FieldAdd(CompFieldArray);
+            FieldAdd(compFieldArray);
 
             Ship boat = new Ship(3, 4, 4, true);
             AddShipToFild(boat, userFieldArray);
@@ -33,9 +33,9 @@ namespace SeaWarProject
             {
                 FieldOnDisplayUser(userFieldArray);
                 Console.WriteLine();
-                FieldOnDisplayComp(CompFieldArray, x, y);
+                FieldOnDisplayComp(compFieldArray, x, y);
 
-                MooveOnDisplay(CompFieldArray, ref x, ref y);
+                MoveOnDisplay(compFieldArray, ref x, ref y);
                 Console.SetCursorPosition(0, 0);
             }
         }
@@ -146,7 +146,7 @@ namespace SeaWarProject
         /// <param name="arrField"> массив поля</param>
         /// <param name="mooveOnX">переменная движения по вертикали</param>
         /// <param name="mooveOnY">переменная движения по горизонтали</param>
-        public static void MooveOnDisplay(int[,] arrField, ref int moveOnX, ref int moveOnY)
+        public static void MoveOnDisplay(int[,] arrField, ref int moveOnX, ref int moveOnY)
         {
             ConsoleKeyInfo PressedKey = Console.ReadKey(true);
 
@@ -179,7 +179,5 @@ namespace SeaWarProject
                     break;
             }
         }
-
-
     }
 }
