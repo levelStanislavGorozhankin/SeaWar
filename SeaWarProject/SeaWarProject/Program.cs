@@ -26,6 +26,9 @@ namespace SeaWarProject
 
             Ship boat = new Ship(3, 4, 4, true);
             AddShipToFild(boat, userFieldArray);
+
+
+
             while (true)
             {
                 FieldOnDisplayUser(userFieldArray);
@@ -45,6 +48,7 @@ namespace SeaWarProject
                 arrField[boat.Boat[i].LocationX, boat.Boat[i].LocationY] = 1;
             }
         }
+
         /// <summary>
         /// метод заполнения массивов инфой(проверочный)
         /// </summary>
