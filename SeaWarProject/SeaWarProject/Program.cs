@@ -24,10 +24,8 @@ namespace SeaWarProject
             FieldAdd(userFieldArray);
             FieldAdd(compFieldArray);
 
-            Ship boat = new Ship(3, 4, 4, true);
+            Ship boat = new Ship(3, 4, 4, false);
             AddShipToFild(boat, userFieldArray);
-
-
 
             while (true)
             {
