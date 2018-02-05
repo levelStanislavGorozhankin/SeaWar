@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SeaWarProject
 {
-    class Ship
+   public class Ship
     {
         public int HeadShipX; //координата первой палубы корабля по Х
         public int HeadShipY; //координата первой палубы корабля по Y
