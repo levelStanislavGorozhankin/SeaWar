@@ -9,7 +9,8 @@ namespace SeaWarProject
 {
     class Program
     {
-        const int XY = 10;
+        public const int XY = 10;
+
         static void Main(string[] args)
         {
 
@@ -24,8 +25,11 @@ namespace SeaWarProject
             FieldAdd(userFieldArray);
             FieldAdd(compFieldArray);
 
-            Ship boat = new Ship(3, 4, 4, false);
-            AddShipToFild(boat, userFieldArray);
+            Players player1 = new Players();
+            player1.Name = "vasya";
+            player1.InitShips();
+           // Ship boat = new Ship(3, 4, 4, false);
+            AddShipToFild(player1.ShipsArray, userFieldArray);
 
             while (true)
             {
@@ -39,11 +43,14 @@ namespace SeaWarProject
         }
 
         //метод добавления коробля на поле, будет изменятся
-        public static void AddShipToFild(Ship boat, int[,] arrField)
+        public static void AddShipToFild(Ship[] ShipsArray, int[,] arrField)
         {
-            for (var i = 0; i < boat.ShipClass; i++)
+            for (var countShips = 0; countShips < ShipsArray.Length; countShips++)
             {
-                arrField[boat.Boat[i].LocationX, boat.Boat[i].LocationY] = 1;
+                for (var i = 0; i < ShipsArray[countShips].ShipClass; i++)
+                {
+                    arrField[ShipsArray[countShips].Boat[i].LocationX, ShipsArray[countShips].Boat[i].LocationY] = 1;
+                }
             }
         }
 
@@ -125,7 +132,19 @@ namespace SeaWarProject
                 Console.Write("│");
                 for (int j = 0; j < arrField.GetLength(1); j++)
                 {
-                    Console.Write(arrField[i, j] + " ");
+                    switch (arrField[i, j])
+                    {
+                        case 0:
+                            {
+                                Console.Write("  ");
+                                break;
+                            }
+                        case 1:
+                            {
+                                Console.Write("■ ");
+                                break;
+                            }
+                    }
                 }
                 Console.WriteLine("│");
             }
