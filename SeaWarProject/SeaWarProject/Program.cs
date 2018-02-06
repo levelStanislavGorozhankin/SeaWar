@@ -30,8 +30,6 @@ namespace SeaWarProject
                 Name = "vasya"
             };
 
-            player1.InitShips();
-           
             AddShipToFild(player1.ShipsArray, userFieldArray);
 
             while (true)

@@ -8,7 +8,7 @@ namespace SeaWarProject
 {
     public abstract class Players
     {
-        public Ship[] ShipsArray = new Ship[10];
+        internal Ship[] ShipsArray = new Ship[10];
         private string _name { get; set; }
         static private Random Rand = new Random();
 
