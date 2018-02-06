@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SeaWarProject
 {
-    public class Players
+    public abstract class Players
     {
         public Ship[] ShipsArray = new Ship[10];
         private string _name { get; set; }
@@ -31,6 +31,8 @@ namespace SeaWarProject
                 }
             }
         }
+
+        public abstract void DoMove();
 
         public void InitShips()
         {

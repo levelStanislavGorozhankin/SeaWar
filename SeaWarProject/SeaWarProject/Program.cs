@@ -25,10 +25,13 @@ namespace SeaWarProject
             FieldAdd(userFieldArray);
             FieldAdd(compFieldArray);
 
-            Players player1 = new Players();
-            player1.Name = "vasya";
+            HumanPlayer player1 = new HumanPlayer
+            {
+                Name = "vasya"
+            };
+
             player1.InitShips();
-           // Ship boat = new Ship(3, 4, 4, false);
+           
             AddShipToFild(player1.ShipsArray, userFieldArray);
 
             while (true)
