@@ -10,7 +10,7 @@ namespace SeaWarProject
     {
         internal Ship[] ShipsArray = new Ship[10];
         private string _name { get; set; }
-        static private Random Rand = new Random();
+        static protected Random Rand = new Random();
 
         public string Name
         {
@@ -32,13 +32,41 @@ namespace SeaWarProject
             }
         }
 
-        public abstract void DoMove();
+        public abstract void DoMove(int [,] field, Ship[] enemyShipsArray);
 
-        public void InitShips()
+        /// <summary>
+        /// Проверка попадания по палубе с изменением ее статуса
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        protected bool HitTest(int x, int y, Ship[] enemyShipsArray)
+        {
+            for (var count = 0; count < enemyShipsArray.Length; count++)
+            {
+                for (var numberDeck = 0; numberDeck < enemyShipsArray[count].ShipClass; numberDeck++)
+                {
+                    if (enemyShipsArray[count].Boat[numberDeck].LocationX == x && enemyShipsArray[count].Boat[numberDeck].LocationY == y)
+                    {
+                        enemyShipsArray[count].Boat[numberDeck].HittingState = true;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Рандомная расстановка кораблей на поле
+        /// </summary>
+        protected void InitShips()
         {
             bool directition = Rand.Next(2) == 0 ? false : true;
             int shipClass = 4;
-            Ship tmpShip = new Ship(Rand.Next(0, directition ? Program.XY - shipClass : Program.XY), Rand.Next(0, directition ? Program.XY : Program.XY - shipClass), shipClass, directition);
+
+            Ship tmpShip = new Ship(Rand.Next(0, directition ? Program.XY - shipClass : Program.XY), 
+                Rand.Next(0, directition ? Program.XY : Program.XY - shipClass), shipClass, directition);
+
             for (int count = 0; count < ShipsArray.Length; count++)
             {
                 ShipsArray[count] = tmpShip;
@@ -47,7 +75,8 @@ namespace SeaWarProject
                 directition = Rand.Next(2) == 0 ? false : true;
                 while (TestShipLocation(tmpShip))
                 {
-                    tmpShip = new Ship(Rand.Next(0, directition ? Program.XY - shipClass : Program.XY), Rand.Next(0, directition ? Program.XY : Program.XY - shipClass), shipClass, directition);
+                    tmpShip = new Ship(Rand.Next(0, directition ? Program.XY - shipClass : Program.XY), 
+                        Rand.Next(0, directition ? Program.XY : Program.XY - shipClass), shipClass, directition);
                 }
             }
 
