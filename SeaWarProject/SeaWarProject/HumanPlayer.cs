@@ -13,7 +13,7 @@ namespace SeaWarProject
             InitShips();
         }
 
-        public override void DoMove()
+        public override void DoMove(int[,] field, Ship[] enemyShipsArray)
         {
 
         }

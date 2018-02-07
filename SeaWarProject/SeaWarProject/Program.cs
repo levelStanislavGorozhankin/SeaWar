@@ -30,15 +30,23 @@ namespace SeaWarProject
                 Name = "vasya"
             };
 
+            ComputerPlayer comp = new ComputerPlayer
+            {
+                Name = "Computer"
+            };
+
             AddShipToFild(player1.ShipsArray, userFieldArray);
+            AddShipToFild(comp.ShipsArray, compFieldArray);
 
             while (true)
             {
+                Console.WriteLine("User Field");
                 FieldOnDisplayUser(userFieldArray);
-                Console.WriteLine();
+                Console.WriteLine("\nComputer Field");
                 FieldOnDisplayComp(compFieldArray, x, y);
 
                 MoveOnDisplay(compFieldArray, ref x, ref y);
+                comp.DoMove(userFieldArray, player1.ShipsArray);
                 Console.SetCursorPosition(0, 0);
             }
         }
@@ -95,7 +103,7 @@ namespace SeaWarProject
                     if (moveOnX == i && moveOnY == j)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write("* ");
+                        Console.Write(arrField[i, j]+ " ");
                         Console.ResetColor();
                     }
                     else
@@ -143,6 +151,18 @@ namespace SeaWarProject
                         case 1:
                             {
                                 Console.Write("■ ");
+                                break;
+                            }
+                        case 2:
+                            {
+                                Console.Write(". ");
+                                break;
+                            }
+                        case 3:
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.Write("■ ");
+                                Console.ResetColor();
                                 break;
                             }
                     }
